@@ -24,7 +24,9 @@
       "one": "",
       "status_leds": "",
       "packetizer_0": "",
-      "packetizer_1": ""
+      "packetizer_1": "",
+      "eth1_ila": "",
+      "eth0_ila": ""
     },
     "interface_ports": {
       "qsfp0_clk": {
@@ -821,25 +823,105 @@
             "value": "2"
           }
         }
+      },
+      "eth1_ila": {
+        "vlnv": "xilinx.com:ip:system_ila:1.1",
+        "xci_name": "top_level_system_ila_0_0",
+        "xci_path": "ip/top_level_system_ila_0_0/top_level_system_ila_0_0.xci",
+        "inst_hier_path": "eth1_ila",
+        "parameters": {
+          "C_NUM_MONITOR_SLOTS": {
+            "value": "2"
+          },
+          "C_SLOT": {
+            "value": "0"
+          },
+          "C_SLOT_0_INTF_TYPE": {
+            "value": "xilinx.com:interface:axis_rtl:1.0"
+          },
+          "C_SLOT_1_INTF_TYPE": {
+            "value": "xilinx.com:interface:axis_rtl:1.0"
+          }
+        },
+        "interface_ports": {
+          "SLOT_0_AXIS": {
+            "mode": "Monitor",
+            "vlnv_bus_definition": "xilinx.com:interface:axis:1.0",
+            "vlnv": "xilinx.com:interface:axis_rtl:1.0"
+          },
+          "SLOT_1_AXIS": {
+            "mode": "Monitor",
+            "vlnv_bus_definition": "xilinx.com:interface:axis:1.0",
+            "vlnv": "xilinx.com:interface:axis_rtl:1.0"
+          }
+        }
+      },
+      "eth0_ila": {
+        "vlnv": "xilinx.com:ip:system_ila:1.1",
+        "xci_name": "top_level_system_ila_0_1",
+        "xci_path": "ip/top_level_system_ila_0_1/top_level_system_ila_0_1.xci",
+        "inst_hier_path": "eth0_ila",
+        "parameters": {
+          "C_NUM_MONITOR_SLOTS": {
+            "value": "2"
+          },
+          "C_SLOT": {
+            "value": "0"
+          },
+          "C_SLOT_0_INTF_TYPE": {
+            "value": "xilinx.com:interface:axis_rtl:1.0"
+          },
+          "C_SLOT_1_INTF_TYPE": {
+            "value": "xilinx.com:interface:axis_rtl:1.0"
+          }
+        },
+        "interface_ports": {
+          "SLOT_0_AXIS": {
+            "mode": "Monitor",
+            "vlnv_bus_definition": "xilinx.com:interface:axis:1.0",
+            "vlnv": "xilinx.com:interface:axis_rtl:1.0"
+          },
+          "SLOT_1_AXIS": {
+            "mode": "Monitor",
+            "vlnv_bus_definition": "xilinx.com:interface:axis:1.0",
+            "vlnv": "xilinx.com:interface:axis_rtl:1.0"
+          }
+        }
       }
     },
     "interface_nets": {
+      "ETH0_RX": {
+        "interface_ports": [
+          "packetizer_1/S_AXIS",
+          "eth_0/axis_rx",
+          "eth0_ila/SLOT_0_AXIS"
+        ]
+      },
+      "ETH0_TX": {
+        "interface_ports": [
+          "packetizer_1/M_AXIS",
+          "eth_0/axis_tx",
+          "eth0_ila/SLOT_1_AXIS"
+        ]
+      },
+      "ETH1_RX": {
+        "interface_ports": [
+          "eth_1/axis_rx",
+          "packetizer_0/S_AXIS",
+          "eth1_ila/SLOT_0_AXIS"
+        ]
+      },
+      "ETH1_TX": {
+        "interface_ports": [
+          "packetizer_0/M_AXIS",
+          "eth_1/axis_tx",
+          "eth1_ila/SLOT_1_AXIS"
+        ]
+      },
       "cmac_usplus_0_gt_serial_port": {
         "interface_ports": [
           "qsfp0_gt",
           "eth_0/qsfp_gt"
-        ]
-      },
-      "eth_0_axis_rx": {
-        "interface_ports": [
-          "packetizer_1/S_AXIS",
-          "eth_0/axis_rx"
-        ]
-      },
-      "eth_1_axis_rx": {
-        "interface_ports": [
-          "eth_1/axis_rx",
-          "packetizer_0/S_AXIS"
         ]
       },
       "eth_1_qsfp_gt": {
@@ -859,18 +941,6 @@
           "qsfp1_clk",
           "eth_1/qsfp_clk"
         ]
-      },
-      "packetizer_0_M_AXIS": {
-        "interface_ports": [
-          "packetizer_0/M_AXIS",
-          "eth_1/axis_tx"
-        ]
-      },
-      "packetizer_1_M_AXIS": {
-        "interface_ports": [
-          "packetizer_1/M_AXIS",
-          "eth_0/axis_tx"
-        ]
       }
     },
     "nets": {
@@ -883,13 +953,15 @@
       "eth_0_stream_clk": {
         "ports": [
           "eth_0/stream_clk",
-          "packetizer_1/s_axis_aclk"
+          "packetizer_1/s_axis_aclk",
+          "eth0_ila/clk"
         ]
       },
       "eth_0_stream_resetn": {
         "ports": [
           "eth_0/stream_resetn",
-          "packetizer_1/s_axis_aresetn"
+          "packetizer_1/s_axis_aresetn",
+          "eth0_ila/resetn"
         ]
       },
       "eth_1_aligned": {
@@ -901,13 +973,15 @@
       "eth_1_stream_clk": {
         "ports": [
           "eth_1/stream_clk",
-          "packetizer_0/s_axis_aclk"
+          "packetizer_0/s_axis_aclk",
+          "eth1_ila/clk"
         ]
       },
       "eth_1_stream_resetn": {
         "ports": [
           "eth_1/stream_resetn",
-          "packetizer_0/s_axis_aresetn"
+          "packetizer_0/s_axis_aresetn",
+          "eth1_ila/resetn"
         ]
       },
       "source_200Mhz_resetn": {
