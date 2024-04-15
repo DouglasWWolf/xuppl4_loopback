@@ -7,8 +7,7 @@
       "name": "top_level",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
       "synth_flow_mode": "Hierarchical",
-      "tool_version": "2021.1",
-      "validated": "true"
+      "tool_version": "2021.1"
     },
     "design_tree": {
       "eth_0": {
@@ -34,10 +33,6 @@
         "vlnv_bus_definition": "xilinx.com:interface:diff_clock:1.0",
         "vlnv": "xilinx.com:interface:diff_clock_rtl:1.0",
         "parameters": {
-          "CAN_DEBUG": {
-            "value": "false",
-            "value_src": "default"
-          },
           "FREQ_HZ": {
             "value": "322265625"
           }
@@ -46,34 +41,18 @@
       "qsfp0_gt": {
         "mode": "Master",
         "vlnv_bus_definition": "xilinx.com:interface:gt:1.0",
-        "vlnv": "xilinx.com:interface:gt_rtl:1.0",
-        "parameters": {
-          "CAN_DEBUG": {
-            "value": "false",
-            "value_src": "default"
-          }
-        }
+        "vlnv": "xilinx.com:interface:gt_rtl:1.0"
       },
       "qsfp1_gt": {
         "mode": "Master",
         "vlnv_bus_definition": "xilinx.com:interface:gt:1.0",
-        "vlnv": "xilinx.com:interface:gt_rtl:1.0",
-        "parameters": {
-          "CAN_DEBUG": {
-            "value": "false",
-            "value_src": "default"
-          }
-        }
+        "vlnv": "xilinx.com:interface:gt_rtl:1.0"
       },
       "qsfp1_clk": {
         "mode": "Slave",
         "vlnv_bus_definition": "xilinx.com:interface:diff_clock:1.0",
         "vlnv": "xilinx.com:interface:diff_clock_rtl:1.0",
         "parameters": {
-          "CAN_DEBUG": {
-            "value": "false",
-            "value_src": "default"
-          },
           "FREQ_HZ": {
             "value": "322265625"
           }
@@ -830,6 +809,9 @@
         "xci_path": "ip/top_level_system_ila_0_0/top_level_system_ila_0_0.xci",
         "inst_hier_path": "eth1_ila",
         "parameters": {
+          "C_MON_TYPE": {
+            "value": "MIX"
+          },
           "C_NUM_MONITOR_SLOTS": {
             "value": "2"
           },
@@ -862,6 +844,9 @@
         "xci_path": "ip/top_level_system_ila_0_1/top_level_system_ila_0_1.xci",
         "inst_hier_path": "eth0_ila",
         "parameters": {
+          "C_MON_TYPE": {
+            "value": "MIX"
+          },
           "C_NUM_MONITOR_SLOTS": {
             "value": "2"
           },
@@ -944,10 +929,18 @@
       }
     },
     "nets": {
-      "eth_0_aligned": {
+      "eth0_aligned": {
         "ports": [
           "eth_0/aligned",
-          "status_leds/qsfp0_up"
+          "status_leds/qsfp0_up",
+          "eth0_ila/probe0"
+        ]
+      },
+      "eth1_aligned": {
+        "ports": [
+          "eth_1/aligned",
+          "status_leds/qsfp1_up",
+          "eth1_ila/probe0"
         ]
       },
       "eth_0_stream_clk": {
@@ -962,12 +955,6 @@
           "eth_0/stream_resetn",
           "packetizer_1/s_axis_aresetn",
           "eth0_ila/resetn"
-        ]
-      },
-      "eth_1_aligned": {
-        "ports": [
-          "eth_1/aligned",
-          "status_leds/qsfp1_up"
         ]
       },
       "eth_1_stream_clk": {
