@@ -34,8 +34,8 @@ preplace netloc eth_1_stream_resetn 1 1 1 260J 100n
 preplace netloc source_200Mhz_resetn 1 1 1 300 300n
 preplace netloc status_leds_led_green_l 1 3 1 N 300
 preplace netloc status_leds_led_orange_l 1 3 1 N 320
-preplace netloc zero_dout 1 3 1 N 510
 preplace netloc value_0x0_dout 1 3 1 N 610
+preplace netloc zero_dout 1 3 1 N 510
 preplace netloc ETH0_RX 1 1 1 260 410n
 preplace netloc ETH0_TX 1 1 1 280 390n
 preplace netloc ETH1_RX 1 1 1 300 60n
