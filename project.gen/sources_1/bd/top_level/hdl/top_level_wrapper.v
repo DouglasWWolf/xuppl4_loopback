@@ -1,7 +1,7 @@
 //Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
-//Date        : Wed Apr 17 02:07:57 2024
+//Date        : Mon May 27 17:27:07 2024
 //Host        : simtool-5 running 64-bit Ubuntu 20.04.6 LTS
 //Command     : generate_target top_level_wrapper.bd
 //Design      : top_level_wrapper
@@ -10,7 +10,8 @@
 `timescale 1 ps / 1 ps
 
 module top_level_wrapper
-   (led_green_l,
+   (init_clk,
+    led_green_l,
     led_orange_l,
     qsfp0_clk_clk_n,
     qsfp0_clk_clk_p,
@@ -26,6 +27,7 @@ module top_level_wrapper
     qsfp1_gt_gtx_p,
     qsfp_lp,
     qsfp_rst_l);
+  input init_clk;
   output [3:0]led_green_l;
   output [3:0]led_orange_l;
   input qsfp0_clk_clk_n;
@@ -43,6 +45,7 @@ module top_level_wrapper
   output [1:0]qsfp_lp;
   output [1:0]qsfp_rst_l;
 
+  wire init_clk;
   wire [3:0]led_green_l;
   wire [3:0]led_orange_l;
   wire qsfp0_clk_clk_n;
@@ -61,7 +64,8 @@ module top_level_wrapper
   wire [1:0]qsfp_rst_l;
 
   top_level top_level_i
-       (.led_green_l(led_green_l),
+       (.init_clk(init_clk),
+        .led_green_l(led_green_l),
         .led_orange_l(led_orange_l),
         .qsfp0_clk_clk_n(qsfp0_clk_clk_n),
         .qsfp0_clk_clk_p(qsfp0_clk_clk_p),
