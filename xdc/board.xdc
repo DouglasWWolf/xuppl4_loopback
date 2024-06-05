@@ -32,10 +32,14 @@ create_clock -period 10.000 [get_ports init_clk]
 #
 # 100 MHz PCIe clock
 #
-#set_property PACKAGE_PIN AE7                   [get_ports pcie_refclk_clk_p]
-#set_property PACKAGE_PIN AE6                   [get_ports pcie_refclk_clk_n]
-#create_clock -period 10.000 -name pcie_sys_clk [get_ports pcie_refclk_clk_p]
-#set_clock_groups -group [get_clocks pcie_sys_clk -include_generated_clocks] -asynchronous
+set_property PACKAGE_PIN AE7                   [get_ports pcie_refclk_clk_p]
+set_property PACKAGE_PIN AE6                   [get_ports pcie_refclk_clk_n]
+create_clock -period 10.000 -name pcie_sys_clk [get_ports pcie_refclk_clk_p]
+set_clock_groups -group [get_clocks pcie_sys_clk -include_generated_clocks] -asynchronous
+
+
+
+
 
 
 #

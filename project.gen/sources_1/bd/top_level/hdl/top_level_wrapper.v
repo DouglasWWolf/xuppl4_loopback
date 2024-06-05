@@ -1,7 +1,7 @@
 //Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
-//Date        : Mon May 27 17:27:07 2024
+//Date        : Tue Jun  4 15:58:14 2024
 //Host        : simtool-5 running 64-bit Ubuntu 20.04.6 LTS
 //Command     : generate_target top_level_wrapper.bd
 //Design      : top_level_wrapper
@@ -13,6 +13,12 @@ module top_level_wrapper
    (init_clk,
     led_green_l,
     led_orange_l,
+    pcie_mgt_rxn,
+    pcie_mgt_rxp,
+    pcie_mgt_txn,
+    pcie_mgt_txp,
+    pcie_refclk_clk_n,
+    pcie_refclk_clk_p,
     qsfp0_clk_clk_n,
     qsfp0_clk_clk_p,
     qsfp0_gt_grx_n,
@@ -30,6 +36,12 @@ module top_level_wrapper
   input init_clk;
   output [3:0]led_green_l;
   output [3:0]led_orange_l;
+  input [15:0]pcie_mgt_rxn;
+  input [15:0]pcie_mgt_rxp;
+  output [15:0]pcie_mgt_txn;
+  output [15:0]pcie_mgt_txp;
+  input [0:0]pcie_refclk_clk_n;
+  input [0:0]pcie_refclk_clk_p;
   input qsfp0_clk_clk_n;
   input qsfp0_clk_clk_p;
   input [3:0]qsfp0_gt_grx_n;
@@ -48,6 +60,12 @@ module top_level_wrapper
   wire init_clk;
   wire [3:0]led_green_l;
   wire [3:0]led_orange_l;
+  wire [15:0]pcie_mgt_rxn;
+  wire [15:0]pcie_mgt_rxp;
+  wire [15:0]pcie_mgt_txn;
+  wire [15:0]pcie_mgt_txp;
+  wire [0:0]pcie_refclk_clk_n;
+  wire [0:0]pcie_refclk_clk_p;
   wire qsfp0_clk_clk_n;
   wire qsfp0_clk_clk_p;
   wire [3:0]qsfp0_gt_grx_n;
@@ -67,6 +85,12 @@ module top_level_wrapper
        (.init_clk(init_clk),
         .led_green_l(led_green_l),
         .led_orange_l(led_orange_l),
+        .pcie_mgt_rxn(pcie_mgt_rxn),
+        .pcie_mgt_rxp(pcie_mgt_rxp),
+        .pcie_mgt_txn(pcie_mgt_txn),
+        .pcie_mgt_txp(pcie_mgt_txp),
+        .pcie_refclk_clk_n(pcie_refclk_clk_n),
+        .pcie_refclk_clk_p(pcie_refclk_clk_p),
         .qsfp0_clk_clk_n(qsfp0_clk_clk_n),
         .qsfp0_clk_clk_p(qsfp0_clk_clk_p),
         .qsfp0_gt_grx_n(qsfp0_gt_grx_n),
