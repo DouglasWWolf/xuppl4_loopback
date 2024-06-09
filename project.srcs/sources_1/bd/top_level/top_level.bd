@@ -12,13 +12,10 @@
     },
     "design_tree": {
       "loopback": {
-        "status_leds": "",
         "eth1_ila": "",
-        "value_0x3": "",
-        "packetizer_0": "",
         "packetizer_1": "",
+        "packetizer_0": "",
         "eth0_ila": "",
-        "value_0x0": "",
         "eth_0": {
           "cmac": "",
           "cmac_control": ""
@@ -26,7 +23,9 @@
         "eth_1": {
           "cmac": "",
           "cmac_control": ""
-        }
+        },
+        "activity_mon_0": "",
+        "activity_mon_1": ""
       },
       "pcie": {
         "one": "",
@@ -35,7 +34,10 @@
         "system_interconnect": "",
         "axi_revision": "",
         "axi_config": ""
-      }
+      },
+      "status_leds": "",
+      "value_0x3": "",
+      "value_0x0": ""
     },
     "interface_ports": {
       "qsfp0_clk": {
@@ -159,26 +161,6 @@
           }
         },
         "ports": {
-          "led_green_l": {
-            "direction": "O",
-            "left": "3",
-            "right": "0"
-          },
-          "led_orange_l": {
-            "direction": "O",
-            "left": "3",
-            "right": "0"
-          },
-          "qsfp_rst_l": {
-            "direction": "O",
-            "left": "1",
-            "right": "0"
-          },
-          "qsfp_lp": {
-            "direction": "O",
-            "left": "1",
-            "right": "0"
-          },
           "init_clk": {
             "direction": "I"
           },
@@ -192,38 +174,21 @@
           },
           "sys_resetn": {
             "direction": "I"
+          },
+          "active_0": {
+            "direction": "O"
+          },
+          "active_1": {
+            "direction": "O"
+          },
+          "aligned": {
+            "direction": "O"
+          },
+          "aligned1": {
+            "direction": "O"
           }
         },
         "components": {
-          "status_leds": {
-            "vlnv": "xilinx.com:module_ref:status_leds:1.0",
-            "xci_name": "top_level_status_leds_0_0",
-            "xci_path": "ip/top_level_status_leds_0_0/top_level_status_leds_0_0.xci",
-            "inst_hier_path": "loopback/status_leds",
-            "reference_info": {
-              "ref_type": "hdl",
-              "ref_name": "status_leds",
-              "boundary_crc": "0x0"
-            },
-            "ports": {
-              "qsfp0_up": {
-                "direction": "I"
-              },
-              "qsfp1_up": {
-                "direction": "I"
-              },
-              "led_green_l": {
-                "direction": "O",
-                "left": "3",
-                "right": "0"
-              },
-              "led_orange_l": {
-                "direction": "O",
-                "left": "3",
-                "right": "0"
-              }
-            }
-          },
           "eth1_ila": {
             "vlnv": "xilinx.com:ip:system_ila:1.1",
             "xci_name": "top_level_system_ila_0_0",
@@ -259,25 +224,11 @@
               }
             }
           },
-          "value_0x3": {
-            "vlnv": "xilinx.com:ip:xlconstant:1.1",
-            "xci_name": "top_level_xlconstant_0_2",
-            "xci_path": "ip/top_level_xlconstant_0_2/top_level_xlconstant_0_2.xci",
-            "inst_hier_path": "loopback/value_0x3",
-            "parameters": {
-              "CONST_VAL": {
-                "value": "3"
-              },
-              "CONST_WIDTH": {
-                "value": "2"
-              }
-            }
-          },
-          "packetizer_0": {
+          "packetizer_1": {
             "vlnv": "xilinx.com:ip:axis_data_fifo:2.0",
             "xci_name": "top_level_axis_data_fifo_0_1",
             "xci_path": "ip/top_level_axis_data_fifo_0_1/top_level_axis_data_fifo_0_1.xci",
-            "inst_hier_path": "loopback/packetizer_0",
+            "inst_hier_path": "loopback/packetizer_1",
             "parameters": {
               "FIFO_DEPTH": {
                 "value": "4096"
@@ -287,11 +238,11 @@
               }
             }
           },
-          "packetizer_1": {
+          "packetizer_0": {
             "vlnv": "xilinx.com:ip:axis_data_fifo:2.0",
             "xci_name": "top_level_packetizer_0_0",
             "xci_path": "ip/top_level_packetizer_0_0/top_level_packetizer_0_0.xci",
-            "inst_hier_path": "loopback/packetizer_1",
+            "inst_hier_path": "loopback/packetizer_0",
             "parameters": {
               "FIFO_DEPTH": {
                 "value": "4096"
@@ -333,20 +284,6 @@
                 "mode": "Monitor",
                 "vlnv_bus_definition": "xilinx.com:interface:axis:1.0",
                 "vlnv": "xilinx.com:interface:axis_rtl:1.0"
-              }
-            }
-          },
-          "value_0x0": {
-            "vlnv": "xilinx.com:ip:xlconstant:1.1",
-            "xci_name": "top_level_value_0x3_0",
-            "xci_path": "ip/top_level_value_0x3_0/top_level_value_0x3_0.xci",
-            "inst_hier_path": "loopback/value_0x0",
-            "parameters": {
-              "CONST_VAL": {
-                "value": "0"
-              },
-              "CONST_WIDTH": {
-                "value": "2"
               }
             }
           },
@@ -1091,19 +1028,238 @@
                 ]
               }
             }
+          },
+          "activity_mon_0": {
+            "vlnv": "xilinx.com:module_ref:activity_mon:1.0",
+            "xci_name": "top_level_activity_mon_0_0",
+            "xci_path": "ip/top_level_activity_mon_0_0/top_level_activity_mon_0_0.xci",
+            "inst_hier_path": "loopback/activity_mon_0",
+            "reference_info": {
+              "ref_type": "hdl",
+              "ref_name": "activity_mon",
+              "boundary_crc": "0x0"
+            },
+            "interface_ports": {
+              "stream": {
+                "mode": "Monitor",
+                "vlnv_bus_definition": "xilinx.com:interface:axis:1.0",
+                "vlnv": "xilinx.com:interface:axis_rtl:1.0",
+                "parameters": {
+                  "TDATA_NUM_BYTES": {
+                    "value": "64",
+                    "value_src": "auto"
+                  },
+                  "TDEST_WIDTH": {
+                    "value": "0",
+                    "value_src": "constant"
+                  },
+                  "TID_WIDTH": {
+                    "value": "0",
+                    "value_src": "constant"
+                  },
+                  "TUSER_WIDTH": {
+                    "value": "0",
+                    "value_src": "constant"
+                  },
+                  "HAS_TREADY": {
+                    "value": "0",
+                    "value_src": "constant"
+                  },
+                  "HAS_TSTRB": {
+                    "value": "0",
+                    "value_src": "constant"
+                  },
+                  "HAS_TKEEP": {
+                    "value": "0",
+                    "value_src": "constant"
+                  },
+                  "HAS_TLAST": {
+                    "value": "0",
+                    "value_src": "constant"
+                  },
+                  "FREQ_HZ": {
+                    "value": "322265625",
+                    "value_src": "const_prop"
+                  },
+                  "CLK_DOMAIN": {
+                    "value": "top_level_cmac_usplus_0_0_gt_txusrclk2",
+                    "value_src": "default_prop"
+                  }
+                },
+                "port_maps": {
+                  "TDATA": {
+                    "physical_name": "stream_tdata",
+                    "direction": "I",
+                    "left": "511",
+                    "right": "0"
+                  },
+                  "TVALID": {
+                    "physical_name": "stream_tvalid",
+                    "direction": "I"
+                  }
+                }
+              }
+            },
+            "ports": {
+              "clk": {
+                "type": "clk",
+                "direction": "I",
+                "parameters": {
+                  "ASSOCIATED_BUSIF": {
+                    "value": "stream",
+                    "value_src": "constant"
+                  },
+                  "ASSOCIATED_RESET": {
+                    "value": "resetn",
+                    "value_src": "constant"
+                  },
+                  "FREQ_HZ": {
+                    "value": "322265625",
+                    "value_src": "const_prop"
+                  },
+                  "CLK_DOMAIN": {
+                    "value": "top_level_cmac_usplus_0_0_gt_txusrclk2",
+                    "value_src": "default_prop"
+                  }
+                }
+              },
+              "resetn": {
+                "type": "rst",
+                "direction": "I",
+                "parameters": {
+                  "POLARITY": {
+                    "value": "ACTIVE_LOW",
+                    "value_src": "constant"
+                  }
+                }
+              },
+              "active": {
+                "direction": "O"
+              }
+            }
+          },
+          "activity_mon_1": {
+            "vlnv": "xilinx.com:module_ref:activity_mon:1.0",
+            "xci_name": "top_level_activity_mon_1_0",
+            "xci_path": "ip/top_level_activity_mon_1_0/top_level_activity_mon_1_0.xci",
+            "inst_hier_path": "loopback/activity_mon_1",
+            "reference_info": {
+              "ref_type": "hdl",
+              "ref_name": "activity_mon",
+              "boundary_crc": "0x0"
+            },
+            "interface_ports": {
+              "stream": {
+                "mode": "Monitor",
+                "vlnv_bus_definition": "xilinx.com:interface:axis:1.0",
+                "vlnv": "xilinx.com:interface:axis_rtl:1.0",
+                "parameters": {
+                  "TDATA_NUM_BYTES": {
+                    "value": "64",
+                    "value_src": "auto"
+                  },
+                  "TDEST_WIDTH": {
+                    "value": "0",
+                    "value_src": "constant"
+                  },
+                  "TID_WIDTH": {
+                    "value": "0",
+                    "value_src": "constant"
+                  },
+                  "TUSER_WIDTH": {
+                    "value": "0",
+                    "value_src": "constant"
+                  },
+                  "HAS_TREADY": {
+                    "value": "0",
+                    "value_src": "constant"
+                  },
+                  "HAS_TSTRB": {
+                    "value": "0",
+                    "value_src": "constant"
+                  },
+                  "HAS_TKEEP": {
+                    "value": "0",
+                    "value_src": "constant"
+                  },
+                  "HAS_TLAST": {
+                    "value": "0",
+                    "value_src": "constant"
+                  },
+                  "FREQ_HZ": {
+                    "value": "322265625",
+                    "value_src": "const_prop"
+                  },
+                  "CLK_DOMAIN": {
+                    "value": "top_level_cmac_0_gt_txusrclk2",
+                    "value_src": "default_prop"
+                  }
+                },
+                "port_maps": {
+                  "TDATA": {
+                    "physical_name": "stream_tdata",
+                    "direction": "I",
+                    "left": "511",
+                    "right": "0"
+                  },
+                  "TVALID": {
+                    "physical_name": "stream_tvalid",
+                    "direction": "I"
+                  }
+                }
+              }
+            },
+            "ports": {
+              "clk": {
+                "type": "clk",
+                "direction": "I",
+                "parameters": {
+                  "ASSOCIATED_BUSIF": {
+                    "value": "stream",
+                    "value_src": "constant"
+                  },
+                  "ASSOCIATED_RESET": {
+                    "value": "resetn",
+                    "value_src": "constant"
+                  },
+                  "FREQ_HZ": {
+                    "value": "322265625",
+                    "value_src": "const_prop"
+                  },
+                  "CLK_DOMAIN": {
+                    "value": "top_level_cmac_0_gt_txusrclk2",
+                    "value_src": "default_prop"
+                  }
+                }
+              },
+              "resetn": {
+                "type": "rst",
+                "direction": "I",
+                "parameters": {
+                  "POLARITY": {
+                    "value": "ACTIVE_LOW",
+                    "value_src": "constant"
+                  }
+                }
+              },
+              "active": {
+                "direction": "O"
+              }
+            }
           }
         },
         "interface_nets": {
           "ETH0_RX": {
             "interface_ports": [
-              "packetizer_1/S_AXIS",
+              "packetizer_0/S_AXIS",
               "eth_0/axis_rx",
-              "eth0_ila/SLOT_0_AXIS"
+              "eth0_ila/SLOT_0_AXIS",
+              "activity_mon_0/stream"
             ]
           },
           "ETH0_TX": {
             "interface_ports": [
-              "packetizer_1/M_AXIS",
+              "packetizer_0/M_AXIS",
               "eth_0/axis_tx",
               "eth0_ila/SLOT_1_AXIS"
             ]
@@ -1111,13 +1267,14 @@
           "ETH1_RX": {
             "interface_ports": [
               "eth_1/axis_rx",
-              "packetizer_0/S_AXIS",
-              "eth1_ila/SLOT_0_AXIS"
+              "packetizer_1/S_AXIS",
+              "eth1_ila/SLOT_0_AXIS",
+              "activity_mon_1/stream"
             ]
           },
           "ETH1_TX": {
             "interface_ports": [
-              "packetizer_0/M_AXIS",
+              "packetizer_1/M_AXIS",
               "eth_1/axis_tx",
               "eth1_ila/SLOT_1_AXIS"
             ]
@@ -1148,46 +1305,62 @@
           }
         },
         "nets": {
+          "activity_mon_0_active": {
+            "ports": [
+              "activity_mon_0/active",
+              "active_0"
+            ]
+          },
+          "activity_mon_0_active1": {
+            "ports": [
+              "activity_mon_1/active",
+              "active_1"
+            ]
+          },
           "eth0_aligned": {
             "ports": [
               "eth_0/aligned",
-              "status_leds/qsfp0_up",
-              "eth0_ila/probe0"
+              "eth0_ila/probe0",
+              "aligned"
             ]
           },
           "eth1_aligned": {
             "ports": [
               "eth_1/aligned",
-              "status_leds/qsfp1_up",
-              "eth1_ila/probe0"
+              "eth1_ila/probe0",
+              "aligned1"
             ]
           },
           "eth_0_stream_clk": {
             "ports": [
               "eth_0/stream_clk",
-              "packetizer_1/s_axis_aclk",
-              "eth0_ila/clk"
+              "packetizer_0/s_axis_aclk",
+              "eth0_ila/clk",
+              "activity_mon_0/clk"
             ]
           },
           "eth_0_stream_resetn": {
             "ports": [
               "eth_0/stream_resetn",
-              "packetizer_1/s_axis_aresetn",
-              "eth0_ila/resetn"
+              "packetizer_0/s_axis_aresetn",
+              "eth0_ila/resetn",
+              "activity_mon_0/resetn"
             ]
           },
           "eth_1_stream_clk": {
             "ports": [
               "eth_1/stream_clk",
-              "packetizer_0/s_axis_aclk",
-              "eth1_ila/clk"
+              "packetizer_1/s_axis_aclk",
+              "eth1_ila/clk",
+              "activity_mon_1/clk"
             ]
           },
           "eth_1_stream_resetn": {
             "ports": [
               "eth_1/stream_resetn",
-              "packetizer_0/s_axis_aresetn",
-              "eth1_ila/resetn"
+              "packetizer_1/s_axis_aresetn",
+              "eth1_ila/resetn",
+              "activity_mon_1/resetn"
             ]
           },
           "init_clk_0_1": {
@@ -1211,35 +1384,11 @@
               "eth_1/sys_resetn"
             ]
           },
-          "status_leds_led_green_l": {
-            "ports": [
-              "status_leds/led_green_l",
-              "led_green_l"
-            ]
-          },
-          "status_leds_led_orange_l": {
-            "ports": [
-              "status_leds/led_orange_l",
-              "led_orange_l"
-            ]
-          },
           "tx_pre_1": {
             "ports": [
               "tx_pre",
               "eth_0/tx_pre",
               "eth_1/tx_pre"
-            ]
-          },
-          "value_0x0_dout": {
-            "ports": [
-              "value_0x0/dout",
-              "qsfp_lp"
-            ]
-          },
-          "zero_dout": {
-            "ports": [
-              "value_0x3/dout",
-              "qsfp_rst_l"
             ]
           }
         }
@@ -1268,6 +1417,12 @@
           },
           "resetn_out": {
             "direction": "O"
+          },
+          "active0": {
+            "direction": "I"
+          },
+          "active1": {
+            "direction": "I"
           }
         },
         "components": {
@@ -2000,6 +2155,12 @@
                   }
                 }
               },
+              "active0": {
+                "direction": "I"
+              },
+              "active1": {
+                "direction": "I"
+              },
               "RSFEC_ENABLE": {
                 "direction": "O"
               },
@@ -2054,6 +2215,18 @@
           }
         },
         "nets": {
+          "active0_1": {
+            "ports": [
+              "active0",
+              "axi_config/active0"
+            ]
+          },
+          "active1_1": {
+            "ports": [
+              "active1",
+              "axi_config/active1"
+            ]
+          },
           "axi_config_CMAC_TXPRE": {
             "ports": [
               "axi_config/CMAC_TXPRE",
@@ -2107,6 +2280,69 @@
             ]
           }
         }
+      },
+      "status_leds": {
+        "vlnv": "xilinx.com:module_ref:status_leds:1.0",
+        "xci_name": "top_level_status_leds_0_0",
+        "xci_path": "ip/top_level_status_leds_0_0/top_level_status_leds_0_0.xci",
+        "inst_hier_path": "status_leds",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "status_leds",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "qsfp0_up": {
+            "direction": "I"
+          },
+          "qsfp1_up": {
+            "direction": "I"
+          },
+          "active0": {
+            "direction": "I"
+          },
+          "active1": {
+            "direction": "I"
+          },
+          "led_green_l": {
+            "direction": "O",
+            "left": "3",
+            "right": "0"
+          },
+          "led_orange_l": {
+            "direction": "O",
+            "left": "3",
+            "right": "0"
+          }
+        }
+      },
+      "value_0x3": {
+        "vlnv": "xilinx.com:ip:xlconstant:1.1",
+        "xci_name": "top_level_xlconstant_0_2",
+        "xci_path": "ip/top_level_xlconstant_0_2/top_level_xlconstant_0_2.xci",
+        "inst_hier_path": "value_0x3",
+        "parameters": {
+          "CONST_VAL": {
+            "value": "3"
+          },
+          "CONST_WIDTH": {
+            "value": "2"
+          }
+        }
+      },
+      "value_0x0": {
+        "vlnv": "xilinx.com:ip:xlconstant:1.1",
+        "xci_name": "top_level_value_0x3_0",
+        "xci_path": "ip/top_level_value_0x3_0/top_level_value_0x3_0.xci",
+        "inst_hier_path": "value_0x0",
+        "parameters": {
+          "CONST_VAL": {
+            "value": "0"
+          },
+          "CONST_WIDTH": {
+            "value": "2"
+          }
+        }
       }
     },
     "interface_nets": {
@@ -2154,6 +2390,32 @@
           "loopback/init_clk"
         ]
       },
+      "loopback_active_0": {
+        "ports": [
+          "loopback/active_0",
+          "pcie/active0",
+          "status_leds/active0"
+        ]
+      },
+      "loopback_active_1": {
+        "ports": [
+          "loopback/active_1",
+          "pcie/active1",
+          "status_leds/active1"
+        ]
+      },
+      "loopback_aligned": {
+        "ports": [
+          "loopback/aligned",
+          "status_leds/qsfp0_up"
+        ]
+      },
+      "loopback_aligned1": {
+        "ports": [
+          "loopback/aligned1",
+          "status_leds/qsfp1_up"
+        ]
+      },
       "pcie_CMAC_TXPRE": {
         "ports": [
           "pcie/CMAC_TXPRE",
@@ -2174,25 +2436,25 @@
       },
       "status_leds_led_green_l": {
         "ports": [
-          "loopback/led_green_l",
+          "status_leds/led_green_l",
           "led_green_l"
         ]
       },
       "status_leds_led_orange_l": {
         "ports": [
-          "loopback/led_orange_l",
+          "status_leds/led_orange_l",
           "led_orange_l"
         ]
       },
       "value_0x0_dout": {
         "ports": [
-          "loopback/qsfp_lp",
+          "value_0x0/dout",
           "qsfp_lp"
         ]
       },
-      "zero_dout": {
+      "value_0x3_dout": {
         "ports": [
-          "loopback/qsfp_rst_l",
+          "value_0x3/dout",
           "qsfp_rst_l"
         ]
       }

@@ -93,6 +93,9 @@ reset()
     while [ $(read_reg $REG_RESET) -ne 0 ]; do
         sleep .01
     done
+
+    # Ensure everything has had time to come out of reset
+    sleep .01
 }
 #==============================================================================
 

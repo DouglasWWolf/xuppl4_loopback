@@ -21,6 +21,8 @@ module axi_config # (parameter[4:0] DEFAULT_TXPRE = 5'h00, CLK_HZ = 250000000)
     input clk,
     input resetn,
 
+    input active0, active1,
+
     // This feeds the CMACs
     output reg       RSFEC_ENABLE,
 
@@ -111,7 +113,15 @@ localparam DECERR = 3;
 localparam ADDR_MASK = 7'h7F;
 
 // A reset sequence on resetn_out is initiated when this strobes high
-reg perform_reset;
+reg[1:0] perform_reset;
+
+// These are the "active0", and "active1" inputs, synchronized to "clk"
+wire[1:0] active;
+
+// Synchronize "active0" and "active1" into "active[1:0]"
+cdc_single i_sync_act0(active0, clk, active[0]);
+cdc_single i_sync_act1(active1, clk, active[1]);
+
 
 //==========================================================================
 // This state machine handles AXI4-Lite write requests
@@ -121,7 +131,7 @@ reg perform_reset;
 always @(posedge clk) begin
 
     // This strobes high for exactly 1 cycle at a time
-    perform_reset <= 0;
+    perform_reset[0] <= 0;
 
     // If we're in reset, initialize important registers
     if (resetn == 0) begin
@@ -144,7 +154,7 @@ always @(posedge clk) begin
 
                     REG_TXPRE:  CMAC_TXPRE <= ashi_wdata;
 
-                    REG_RESET:  perform_reset <= 1;
+                    REG_RESET:  perform_reset[0] <= 1;
 
                     // Writes to any other register are a decode-error
                     default: ashi_wresp <= DECERR;
@@ -190,6 +200,39 @@ always @(posedge clk) begin
 end
 //==========================================================================
 
+
+
+//==========================================================================
+// This block initiates a reset sequence on "resetn_out" when it detects
+// that activity on the RX streams has ceased
+//==========================================================================
+reg asm_state;
+always @(posedge clk) begin
+    
+    // This only ever strobes high for 1 clock-cycle
+    perform_reset[1] <= 0;
+
+    // If we're in reset...    
+    if (resetn == 0) begin
+        asm_state <= 0;
+    end
+
+    // Otherwise, we're not in reset, run the state machine
+    else case(asm_state)
+
+        // Wait for activity on the CMAC RX lines
+        0:  if (active) asm_state <= 1;
+
+        // Wait for activity on the CMAC RX lines to cease
+        1:  if (active == 0) begin
+                perform_reset[1] <= 1;
+                asm_state        <= 0;
+            end
+
+    endcase
+
+end
+//==========================================================================
 
 
 

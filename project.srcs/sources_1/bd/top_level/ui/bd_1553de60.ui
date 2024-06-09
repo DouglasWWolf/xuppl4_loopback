@@ -24,10 +24,10 @@ preplace netloc clk_0_1 1 2 1 750 190n
 preplace netloc cmac_control_reset_rx_datapath 1 1 1 N 390
 preplace netloc cmac_control_rx_resetn_out 1 0 1 N 170
 preplace netloc cmac_control_sync_rx_aligned 1 0 1 N 190
-preplace netloc cmac_gt_rxusrclk2 1 1 2 360 10 750
-preplace netloc sys_resetn_1 1 0 1 NJ 150
 preplace netloc cmac_control_sys_reset_out 1 1 1 N 410
+preplace netloc cmac_gt_rxusrclk2 1 1 2 360 10 750
 preplace netloc rsfec_enable_1 1 0 1 N 210
+preplace netloc sys_resetn_1 1 0 1 NJ 150
 preplace netloc tx_pre_1 1 0 1 N 230
 preplace netloc Conn1 1 0 2 NJ 70 NJ
 preplace netloc cmac_axis_rx 1 2 1 NJ 90
@@ -42,7 +42,7 @@ levelinfo -pg 1 0 190 560 770
 pagesize -pg 1 -db -bbox -sgen -160 0 900 590
 ",
    "No Loops_ScaleFactor":"1.0",
-   "No Loops_TopLeft":"-508,-126",
+   "No Loops_TopLeft":"-376,-35",
    "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
 preplace port qsfp_gt -pg 1 -lvl 3 -x 810 -y 200 -defaultsOSRD

@@ -7,38 +7,45 @@
    "No Loops_ExpandedHierarchyInLayout":"",
    "No Loops_Layout":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
-preplace port qsfp0_clk -pg 1 -lvl 2 -x 360 -y 270 -defaultsOSRD -right
-preplace port qsfp0_gt -pg 1 -lvl 2 -x 360 -y 250 -defaultsOSRD
-preplace port qsfp1_gt -pg 1 -lvl 2 -x 360 -y 210 -defaultsOSRD
-preplace port qsfp1_clk -pg 1 -lvl 2 -x 360 -y 230 -defaultsOSRD -right
-preplace port pcie_refclk -pg 1 -lvl 0 -x 0 -y 60 -defaultsOSRD
-preplace port pcie_mgt -pg 1 -lvl 2 -x 360 -y 60 -defaultsOSRD
-preplace port port-id_init_clk -pg 1 -lvl 0 -x 0 -y 270 -defaultsOSRD
-preplace portBus led_green_l -pg 1 -lvl 2 -x 360 -y 290 -defaultsOSRD
-preplace portBus led_orange_l -pg 1 -lvl 2 -x 360 -y 310 -defaultsOSRD
-preplace portBus qsfp_rst_l -pg 1 -lvl 2 -x 360 -y 330 -defaultsOSRD
-preplace portBus qsfp_lp -pg 1 -lvl 2 -x 360 -y 350 -defaultsOSRD
-preplace inst loopback -pg 1 -lvl 1 -x 200 -y 210 -swap {8 1 2 3 4 13 6 7 0 9 10 11 12 5 14 15 16 17 18 19 23 20 21 22} -defaultsOSRD -pinDir qsfp0_gt right -pinY qsfp0_gt 40R -pinDir qsfp0_clk right -pinY qsfp0_clk 60R -pinDir qsfp1_gt right -pinY qsfp1_gt 0R -pinDir qsfp1_clk right -pinY qsfp1_clk 20R -pinBusDir led_green_l right -pinBusY led_green_l 80R -pinBusDir led_orange_l right -pinBusY led_orange_l 100R -pinBusDir qsfp_rst_l right -pinBusY qsfp_rst_l 120R -pinBusDir qsfp_lp right -pinBusY qsfp_lp 140R -pinDir init_clk left -pinY init_clk 60L -pinDir rsfec_enable left -pinY rsfec_enable 0L -pinBusDir tx_pre left -pinBusY tx_pre 20L -pinDir sys_resetn left -pinY sys_resetn 40L
-preplace inst pcie -pg 1 -lvl 1 -x 200 -y 60 -swap {0 1 2 3 4 5 6 7 10 9 8} -defaultsOSRD -pinDir pcie_mgt right -pinY pcie_mgt 0R -pinDir pcie_refclk left -pinY pcie_refclk 0L -pinDir RSFEC_ENABLE left -pinY RSFEC_ENABLE 60L -pinBusDir CMAC_TXPRE left -pinBusY CMAC_TXPRE 40L -pinDir resetn_out left -pinY resetn_out 20L
-preplace netloc init_clk_0_1 1 0 1 NJ 270
-preplace netloc pcie_CMAC_TXPRE 1 0 1 40 100n
-preplace netloc pcie_RSFEC_ENABLE 1 0 1 60 120n
-preplace netloc pcie_resetn_out 1 0 1 20 80n
-preplace netloc status_leds_led_green_l 1 1 1 NJ 290
-preplace netloc status_leds_led_orange_l 1 1 1 NJ 310
-preplace netloc value_0x0_dout 1 1 1 NJ 350
-preplace netloc zero_dout 1 1 1 NJ 330
-preplace netloc CLK_IN_D_0_1 1 0 1 NJ 60
-preplace netloc cmac_usplus_0_gt_serial_port 1 1 1 NJ 250
-preplace netloc eth_1_qsfp_gt 1 1 1 NJ 210
-preplace netloc gt_ref_clk_0_1 1 1 1 NJ 270
-preplace netloc gt_ref_clk_0_2 1 1 1 NJ 230
-preplace netloc pcie_bridge_pcie_mgt 1 1 1 NJ 60
-levelinfo -pg 1 0 200 360
-pagesize -pg 1 -db -bbox -sgen -130 0 540 400
+preplace port qsfp0_clk -pg 1 -lvl 3 -x 660 -y 240 -defaultsOSRD -right
+preplace port qsfp0_gt -pg 1 -lvl 3 -x 660 -y 220 -defaultsOSRD
+preplace port qsfp1_gt -pg 1 -lvl 3 -x 660 -y 260 -defaultsOSRD
+preplace port qsfp1_clk -pg 1 -lvl 3 -x 660 -y 280 -defaultsOSRD -right
+preplace port pcie_refclk -pg 1 -lvl 0 -x 0 -y 240 -defaultsOSRD
+preplace port pcie_mgt -pg 1 -lvl 0 -x 0 -y 220 -defaultsOSRD -left
+preplace port port-id_init_clk -pg 1 -lvl 3 -x 660 -y 340 -defaultsOSRD -right
+preplace portBus led_green_l -pg 1 -lvl 3 -x 660 -y 60 -defaultsOSRD
+preplace portBus led_orange_l -pg 1 -lvl 3 -x 660 -y 80 -defaultsOSRD
+preplace portBus qsfp_rst_l -pg 1 -lvl 3 -x 660 -y 530 -defaultsOSRD
+preplace portBus qsfp_lp -pg 1 -lvl 3 -x 660 -y 430 -defaultsOSRD
+preplace inst loopback -pg 1 -lvl 2 -x 480 -y 220 -swap {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 23 19 20 21 17 18 16 22} -defaultsOSRD -pinDir qsfp0_gt right -pinY qsfp0_gt 0R -pinDir qsfp0_clk right -pinY qsfp0_clk 20R -pinDir qsfp1_gt right -pinY qsfp1_gt 40R -pinDir qsfp1_clk right -pinY qsfp1_clk 60R -pinDir init_clk right -pinY init_clk 120R -pinDir rsfec_enable left -pinY rsfec_enable 40L -pinBusDir tx_pre left -pinBusY tx_pre 60L -pinDir sys_resetn left -pinY sys_resetn 80L -pinDir active_0 left -pinY active_0 0L -pinDir active_1 left -pinY active_1 20L -pinDir aligned right -pinY aligned 80R -pinDir aligned1 right -pinY aligned1 100R
+preplace inst pcie -pg 1 -lvl 1 -x 170 -y 220 -swap {0 1 2 3 4 5 6 7 10 11 12 8 9} -defaultsOSRD -pinDir pcie_mgt left -pinY pcie_mgt 0L -pinDir pcie_refclk left -pinY pcie_refclk 20L -pinDir RSFEC_ENABLE right -pinY RSFEC_ENABLE 40R -pinBusDir CMAC_TXPRE right -pinBusY CMAC_TXPRE 60R -pinDir resetn_out right -pinY resetn_out 80R -pinDir active0 right -pinY active0 0R -pinDir active1 right -pinY active1 20R
+preplace inst status_leds -pg 1 -lvl 2 -x 480 -y 60 -swap {5 4 2 3 0 1} -defaultsOSRD -pinDir qsfp0_up right -pinY qsfp0_up 60R -pinDir qsfp1_up right -pinY qsfp1_up 40R -pinDir active0 left -pinY active0 40L -pinDir active1 left -pinY active1 60L -pinBusDir led_green_l right -pinBusY led_green_l 0R -pinBusDir led_orange_l right -pinBusY led_orange_l 20R
+preplace inst value_0x3 -pg 1 -lvl 2 -x 480 -y 530 -defaultsOSRD -pinBusDir dout right -pinBusY dout 0R
+preplace inst value_0x0 -pg 1 -lvl 2 -x 480 -y 430 -defaultsOSRD -pinBusDir dout right -pinBusY dout 0R
+preplace netloc init_clk_0_1 1 2 1 NJ 340
+preplace netloc pcie_CMAC_TXPRE 1 1 1 N 280
+preplace netloc pcie_RSFEC_ENABLE 1 1 1 N 260
+preplace netloc pcie_resetn_out 1 1 1 N 300
+preplace netloc loopback_active_0 1 1 1 320 100n
+preplace netloc loopback_active_1 1 1 1 340 120n
+preplace netloc loopback_aligned 1 2 1 620 120n
+preplace netloc status_leds_led_orange_l 1 2 1 NJ 80
+preplace netloc status_leds_led_green_l 1 2 1 NJ 60
+preplace netloc loopback_aligned1 1 2 1 640 100n
+preplace netloc value_0x3_dout 1 2 1 NJ 530
+preplace netloc value_0x0_dout 1 2 1 NJ 430
+preplace netloc CLK_IN_D_0_1 1 0 1 NJ 240
+preplace netloc cmac_usplus_0_gt_serial_port 1 2 1 NJ 220
+preplace netloc eth_1_qsfp_gt 1 2 1 NJ 260
+preplace netloc gt_ref_clk_0_1 1 2 1 NJ 240
+preplace netloc gt_ref_clk_0_2 1 2 1 NJ 280
+preplace netloc pcie_bridge_pcie_mgt 1 0 1 NJ 220
+levelinfo -pg 1 0 170 480 660
+pagesize -pg 1 -db -bbox -sgen -130 0 840 590
 ",
    "No Loops_ScaleFactor":"1.0",
-   "No Loops_TopLeft":"-544,-130",
+   "No Loops_TopLeft":"-394,-90",
    "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
 preplace port port-id_clk -pg 1 -lvl 0 -x -10 -y 60 -defaultsOSRD
