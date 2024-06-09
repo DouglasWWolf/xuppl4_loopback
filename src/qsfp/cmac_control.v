@@ -20,6 +20,8 @@
 //
 // 27-May-24  DWW     6  Now exporting the "sync_rx_aligned" signal
 //                       Now driving the tx_precursor setting on the transceivers
+//
+// 08-Jun-24  DWW     7  Added "sys_reset_out", rsfec_enable, and tx_pre
 //===================================================================================================
 
 /*
@@ -45,7 +47,7 @@
 
 */
   
-module cmac_control # (parameter RSFEC = 1, parameter[4:0] TX_PRECURSOR = 5'b00000)
+module cmac_control 
 (
     (* X_INTERFACE_INFO      = "xilinx.com:signal:clock:1.0 rx_clk CLK"           *)
     (* X_INTERFACE_PARAMETER = "ASSOCIATED_RESET rx_reset_out:rx_resetn_out:reset_rx_datapath, FREQ_HZ 322265625" *)
@@ -54,6 +56,12 @@ module cmac_control # (parameter RSFEC = 1, parameter[4:0] TX_PRECURSOR = 5'b000
     (* X_INTERFACE_INFO      = "xilinx.com:signal:reset:1.0 sys_resetn_in RST" *)
     (* X_INTERFACE_PARAMETER = "POLARITY ACTIVE_LOW "                         *)
     input sys_resetn_in,
+
+    // Determines whether RS-FEC is enabled or disabled
+    input  rsfec_enable, 
+
+    // Pre-emphasis setting for GT signal shaping
+    input[4:0] tx_pre,
 
     (* X_INTERFACE_INFO = "xilinx.com:*:rs_fec_ports:2.0 rs_fec ctl_rx_rsfec_enable" *)
     output ctl_rx_rsfec_enable,
@@ -98,14 +106,26 @@ module cmac_control # (parameter RSFEC = 1, parameter[4:0] TX_PRECURSOR = 5'b000
     output     reset_rx_datapath,
 
     // stat_rx_aligned, synchronized to rx_clk
-    output     sync_rx_aligned
+    output     sync_rx_aligned,
+
+    // System reset, not synchronized to any clock
+    output     sys_reset_out
 
 );
 
 //=============================================================================
+// Drive the CMAC module's "sys_reset" pin.  We can't drive it from 
+// "rx_reset_out" because that pin is synchronized with our clock, which may
+// not be running yet.
+//=============================================================================
+assign sys_reset_out = ~sys_resetn_in;
+//=============================================================================
+
+
+//=============================================================================
 // Select the desired amount of transceiver signal pre-emphasis
 //=============================================================================
-assign gt_txprecursor = {4{TX_PRECURSOR}};
+assign gt_txprecursor = {4{tx_pre}};
 //=============================================================================
 
 //=============================================================================
@@ -118,14 +138,6 @@ assign ctl_tx_send_rfi = ~stat_rx_aligned;
 //=============================================================================
 
 
-//=============================================================================
-// Enable or disable forward error correction
-//=============================================================================
-assign ctl_rx_rsfec_enable            = RSFEC;
-assign ctl_rx_rsfec_enable_correction = RSFEC;
-assign ctl_rx_rsfec_enable_indication = RSFEC;
-assign ctl_tx_rsfec_enable            = RSFEC;
-//=============================================================================
 
 // "sys_resetn_in" is active-low
 localparam RESET_ACTIVE = 0;
@@ -167,6 +179,29 @@ cdc0
 
 
 //=============================================================================
+// Synchronize "rsfec_enable" into "rsfec_enable_sync"
+//=============================================================================
+wire rsfec_enable_sync;
+xpm_cdc_single #
+(
+    .DEST_SYNC_FF  (4),   
+    .INIT_SYNC_FF  (0),   
+    .SIM_ASSERT_CHK(0), 
+    .SRC_INPUT_REG (0)   
+)
+i_sync_rsfec_enable
+(
+    .src_clk (                 ),  
+    .src_in  (rsfec_enable     ),
+    .dest_clk(rx_clk           ), 
+    .dest_out(rsfec_enable_sync) 
+);
+//=============================================================================
+
+
+
+
+//=============================================================================
 // Synchronize "sys_resetn_in" into "rx_resetn_out"
 //=============================================================================
 xpm_cdc_async_rst #
@@ -183,6 +218,15 @@ i_sync_sys_resetn_in
 );
 //=============================================================================
 
+
+//=============================================================================
+// Enable or disable forward error correction
+//=============================================================================
+assign ctl_rx_rsfec_enable            = rsfec_enable_sync;
+assign ctl_rx_rsfec_enable_correction = rsfec_enable_sync;
+assign ctl_rx_rsfec_enable_indication = rsfec_enable_sync;
+assign ctl_tx_rsfec_enable            = rsfec_enable_sync;
+//=============================================================================
 
 
 //=============================================================================
