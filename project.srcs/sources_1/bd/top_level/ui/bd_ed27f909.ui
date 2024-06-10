@@ -20,6 +20,8 @@ preplace inst bridge_input_clk -pg 1 -lvl 1 -x 170 -y 250 -swap {0 1 2 4 3} -def
 preplace inst system_interconnect -pg 1 -lvl 3 -x 830 -y 90 -defaultsOSRD -pinDir S00_AXI left -pinY S00_AXI 0L -pinDir M00_AXI right -pinY M00_AXI 0R -pinDir M01_AXI right -pinY M01_AXI 140R -pinDir aclk left -pinY aclk 20L -pinDir aresetn left -pinY aresetn 40L
 preplace inst axi_revision -pg 1 -lvl 4 -x 1140 -y 90 -defaultsOSRD -pinDir S_AXI left -pinY S_AXI 0L -pinDir AXI_ACLK left -pinY AXI_ACLK 20L -pinDir AXI_ARESETN left -pinY AXI_ARESETN 40L
 preplace inst axi_config -pg 1 -lvl 4 -x 1140 -y 230 -swap {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 25 26 22 23 24} -defaultsOSRD -pinDir S_AXI left -pinY S_AXI 0L -pinDir clk left -pinY clk 20L -pinDir resetn left -pinY resetn 40L -pinDir active0 right -pinY active0 60R -pinDir active1 right -pinY active1 80R -pinDir RSFEC_ENABLE right -pinY RSFEC_ENABLE 0R -pinBusDir CMAC_TXPRE right -pinBusY CMAC_TXPRE 20R -pinDir resetn_out right -pinY resetn_out 40R
+preplace netloc active0_1 1 4 1 N 290
+preplace netloc active1_1 1 4 1 N 310
 preplace netloc axi_config_CMAC_TXPRE 1 4 1 N 250
 preplace netloc axi_config_RSFEC_ENABLE 1 4 1 N 230
 preplace netloc axi_config_resetn_out 1 4 1 N 270
@@ -28,8 +30,6 @@ preplace netloc pcie_bridge_axi_aclk 1 2 2 670 10 990
 preplace netloc pcie_bridge_axi_aresetn 1 2 2 690 30 970
 preplace netloc util_ds_buf_0_IBUF_DS_ODIV2 1 1 1 N 250
 preplace netloc util_ds_buf_0_IBUF_OUT 1 1 1 N 270
-preplace netloc active0_1 1 4 1 N 290
-preplace netloc active1_1 1 4 1 N 310
 preplace netloc CLK_IN_D_0_1 1 0 1 NJ 250
 preplace netloc pcie_bridge_M_AXI_B 1 2 1 N 90
 preplace netloc pcie_bridge_pcie_mgt 1 0 2 NJ 90 NJ
