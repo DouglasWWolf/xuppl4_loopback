@@ -34,15 +34,15 @@ preplace netloc Conn3 1 2 1 NJ 90
 preplace netloc cmac_axis_rx 1 2 1 NJ 130
 preplace netloc cmac_control_ex_ctl_rx 1 1 1 N 110
 preplace netloc cmac_control_ex_ctl_tx 1 1 1 N 90
+preplace netloc cmac_control_ex_gt_trans_debug 1 1 1 N 130
 preplace netloc cmac_control_ex_rs_fec 1 1 1 N 150
 preplace netloc cmac_stat_rx 1 1 1 N 70
 preplace netloc cmac_usplus_0_gt_serial_port 1 2 1 NJ 70
-preplace netloc cmac_control_ex_gt_trans_debug 1 1 1 N 130
 levelinfo -pg 1 0 190 560 770
 pagesize -pg 1 -db -bbox -sgen -160 0 900 510
 ",
    "No Loops_ScaleFactor":"1.0",
-   "No Loops_TopLeft":"-425,-75",
+   "No Loops_TopLeft":"-227,-81",
    "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
 preplace port qsfp_gt -pg 1 -lvl 3 -x 810 -y 200 -defaultsOSRD
