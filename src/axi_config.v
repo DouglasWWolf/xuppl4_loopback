@@ -14,7 +14,13 @@
 */
 
 
-module axi_config # (parameter[4:0] DEFAULT_TXPRE = 5'h00, CLK_HZ = 250000000)
+module axi_config #
+(
+    parameter CLK_HZ              = 250000000,
+    parameter[4:0] DEFAULT_TXPRE  = 5'h00,
+    parameter[4:0] DEFAULT_TXPOST = 5'h00,
+    parameter[4:0] DEFAULT_TXDIFF = 5'h18
+)
 (
     (* X_INTERFACE_INFO      = "xilinx.com:signal:clock:1.0 clk CLK"    *)
     (* X_INTERFACE_PARAMETER = "ASSOCIATED_RESET resetn:resetn_out" *)
@@ -26,8 +32,8 @@ module axi_config # (parameter[4:0] DEFAULT_TXPRE = 5'h00, CLK_HZ = 250000000)
     // This feeds the CMACs
     output reg       RSFEC_ENABLE,
 
-    // Transmit pre-emphasis level for the CMACs
-    output reg[4:0]  CMAC_TXPRE,
+    // Waveform shaping for the CMAC transceivers
+    output reg[4:0]  CMAC_TXPRE, CMAC_TXPOST, CMAC_TXDIFF,
 
     // This drives "resetn" for most of the rest of the system
     (* X_INTERFACE_INFO      = "xilinx.com:signal:reset:1.0 resetn_out RST" *)
@@ -70,9 +76,11 @@ module axi_config # (parameter[4:0] DEFAULT_TXPRE = 5'h00, CLK_HZ = 250000000)
 
 
 //=========================  AXI Register Map  =============================
-localparam REG_RESET = 0;
-localparam REG_RSFEC = 1;
-localparam REG_TXPRE = 2;
+localparam REG_RESET  = 0;
+localparam REG_RSFEC  = 1;
+localparam REG_TXPRE  = 2;
+localparam REG_TXPOST = 3;
+localparam REG_TXDIFF = 4;
 //==========================================================================
 
 
@@ -138,6 +146,8 @@ always @(posedge clk) begin
         ashi_write_state  <= 0;
         RSFEC_ENABLE      <= 1;
         CMAC_TXPRE        <= DEFAULT_TXPRE;
+        CMAC_TXPOST       <= DEFAULT_TXPOST;
+        CMAC_TXDIFF       <= DEFAULT_TXDIFF;
 
     // If we're not in reset, and a write-request has occured...        
     end else case (ashi_write_state)
@@ -147,12 +157,13 @@ always @(posedge clk) begin
                 // Assume for the moment that the result will be OKAY
                 ashi_wresp <= OKAY;              
             
-                // Convert the byte address into a register index
+                // Do the right thing depending on the register index
                 case (ashi_windx)
                
                     REG_RSFEC:  RSFEC_ENABLE <= ashi_wdata;
-
-                    REG_TXPRE:  CMAC_TXPRE <= ashi_wdata;
+                    REG_TXPRE:  CMAC_TXPRE   <= ashi_wdata;
+                    REG_TXPOST: CMAC_TXPOST  <= ashi_wdata;
+                    REG_TXDIFF: CMAC_TXDIFF  <= ashi_wdata;
 
                     REG_RESET:  perform_reset[0] <= 1;
 
@@ -185,13 +196,15 @@ always @(posedge clk) begin
         // Assume for the moment that the result will be OKAY
         ashi_rresp <= OKAY;              
         
-        // Convert the byte address into a register index
+        // Do the right thing depending on the register index
         case (ashi_rindx)
             
             // Allow a read from any valid register                
             REG_RESET:  ashi_rdata <= (resetn_out == 0);
             REG_RSFEC:  ashi_rdata <= RSFEC_ENABLE;
             REG_TXPRE:  ashi_rdata <= CMAC_TXPRE;
+            REG_TXPOST: ashi_rdata <= CMAC_TXPOST;
+            REG_TXDIFF: ashi_rdata <= CMAC_TXDIFF;
 
             // Reads of any other register are a decode-error
             default: ashi_rresp <= DECERR;

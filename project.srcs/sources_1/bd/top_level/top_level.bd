@@ -185,6 +185,16 @@
           },
           "aligned1": {
             "direction": "O"
+          },
+          "tx_post": {
+            "direction": "I",
+            "left": "4",
+            "right": "0"
+          },
+          "tx_diff": {
+            "direction": "I",
+            "left": "4",
+            "right": "0"
           }
         },
         "components": {
@@ -335,6 +345,16 @@
                 "direction": "I",
                 "left": "4",
                 "right": "0"
+              },
+              "tx_post": {
+                "direction": "I",
+                "left": "4",
+                "right": "0"
+              },
+              "tx_diff": {
+                "direction": "I",
+                "left": "4",
+                "right": "0"
               }
             },
             "components": {
@@ -450,6 +470,12 @@
                         "left": "19",
                         "right": "0"
                       },
+                      "gt_txpostcursor": {
+                        "physical_name": "gt_txpostcursor",
+                        "direction": "O",
+                        "left": "19",
+                        "right": "0"
+                      },
                       "gt_txprecursor": {
                         "physical_name": "gt_txprecursor",
                         "direction": "O",
@@ -503,6 +529,16 @@
                     "direction": "I"
                   },
                   "tx_pre": {
+                    "direction": "I",
+                    "left": "4",
+                    "right": "0"
+                  },
+                  "tx_post": {
+                    "direction": "I",
+                    "left": "4",
+                    "right": "0"
+                  },
+                  "tx_diff": {
                     "direction": "I",
                     "left": "4",
                     "right": "0"
@@ -655,6 +691,18 @@
                   "cmac_control_ex/sys_resetn_in"
                 ]
               },
+              "tx_diff_1": {
+                "ports": [
+                  "tx_diff",
+                  "cmac_control_ex/tx_diff"
+                ]
+              },
+              "tx_post_1": {
+                "ports": [
+                  "tx_post",
+                  "cmac_control_ex/tx_post"
+                ]
+              },
               "tx_pre_1": {
                 "ports": [
                   "tx_pre",
@@ -709,6 +757,16 @@
                 "direction": "I"
               },
               "tx_pre": {
+                "direction": "I",
+                "left": "4",
+                "right": "0"
+              },
+              "tx_post": {
+                "direction": "I",
+                "left": "4",
+                "right": "0"
+              },
+              "tx_diff": {
                 "direction": "I",
                 "left": "4",
                 "right": "0"
@@ -827,6 +885,12 @@
                         "left": "19",
                         "right": "0"
                       },
+                      "gt_txpostcursor": {
+                        "physical_name": "gt_txpostcursor",
+                        "direction": "O",
+                        "left": "19",
+                        "right": "0"
+                      },
                       "gt_txprecursor": {
                         "physical_name": "gt_txprecursor",
                         "direction": "O",
@@ -880,6 +944,16 @@
                     "direction": "I"
                   },
                   "tx_pre": {
+                    "direction": "I",
+                    "left": "4",
+                    "right": "0"
+                  },
+                  "tx_post": {
+                    "direction": "I",
+                    "left": "4",
+                    "right": "0"
+                  },
+                  "tx_diff": {
                     "direction": "I",
                     "left": "4",
                     "right": "0"
@@ -1030,6 +1104,18 @@
                 "ports": [
                   "sys_resetn",
                   "cmac_control_ex/sys_resetn_in"
+                ]
+              },
+              "tx_diff_1": {
+                "ports": [
+                  "tx_diff",
+                  "cmac_control_ex/tx_diff"
+                ]
+              },
+              "tx_post_1": {
+                "ports": [
+                  "tx_post",
+                  "cmac_control_ex/tx_post"
                 ]
               },
               "tx_pre_1": {
@@ -1395,6 +1481,20 @@
               "eth_1/sys_resetn"
             ]
           },
+          "tx_diff_1": {
+            "ports": [
+              "tx_diff",
+              "eth_0/tx_diff",
+              "eth_1/tx_diff"
+            ]
+          },
+          "tx_post_1": {
+            "ports": [
+              "tx_post",
+              "eth_0/tx_post",
+              "eth_1/tx_post"
+            ]
+          },
           "tx_pre_1": {
             "ports": [
               "tx_pre",
@@ -1434,6 +1534,16 @@
           },
           "active1": {
             "direction": "I"
+          },
+          "CMAC_TXPOST": {
+            "direction": "O",
+            "left": "4",
+            "right": "0"
+          },
+          "CMAC_TXDIFF": {
+            "direction": "O",
+            "left": "4",
+            "right": "0"
           }
         },
         "components": {
@@ -1922,6 +2032,16 @@
                 "left": "4",
                 "right": "0"
               },
+              "CMAC_TXPOST": {
+                "direction": "O",
+                "left": "4",
+                "right": "0"
+              },
+              "CMAC_TXDIFF": {
+                "direction": "O",
+                "left": "4",
+                "right": "0"
+              },
               "resetn_out": {
                 "type": "rst",
                 "direction": "O",
@@ -2238,6 +2358,18 @@
               "axi_config/active1"
             ]
           },
+          "axi_config_CMAC_TXDIFF": {
+            "ports": [
+              "axi_config/CMAC_TXDIFF",
+              "CMAC_TXDIFF"
+            ]
+          },
+          "axi_config_CMAC_TXPOST": {
+            "ports": [
+              "axi_config/CMAC_TXPOST",
+              "CMAC_TXPOST"
+            ]
+          },
           "axi_config_CMAC_TXPRE": {
             "ports": [
               "axi_config/CMAC_TXPRE",
@@ -2420,6 +2552,18 @@
         "ports": [
           "loopback/aligned1",
           "status_leds/qsfp1_up"
+        ]
+      },
+      "pcie_CMAC_TXDIFF": {
+        "ports": [
+          "pcie/CMAC_TXDIFF",
+          "loopback/tx_diff"
+        ]
+      },
+      "pcie_CMAC_TXPOST": {
+        "ports": [
+          "pcie/CMAC_TXPOST",
+          "loopback/tx_post"
         ]
       },
       "pcie_CMAC_TXPRE": {
