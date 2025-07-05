@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xD20E7EE91D564652",
+      "boundary_crc": "0x7C9F37568FD5E805",
       "design_src": "SBD",
       "device": "xcvu3p-ffvc1517-2-e",
       "name": "bd_f519",
@@ -213,7 +213,7 @@
         "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
         "parameters": {
           "ADDR_WIDTH": {
-            "value": "5",
+            "value": "7",
             "value_src": "ip_prop"
           },
           "ARUSER_WIDTH": {
@@ -3548,7 +3548,7 @@
         "inst_hier_path": "m00_sc2axi",
         "parameters": {
           "AXI_ADDR_WIDTH": {
-            "value": "5"
+            "value": "7"
           },
           "AXI_ID_WIDTH": {
             "value": "1"
@@ -4575,7 +4575,7 @@
             "inst_hier_path": "m00_exit_pipeline/m00_exit",
             "parameters": {
               "ADDR_WIDTH": {
-                "value": "5"
+                "value": "7"
               },
               "ENABLE_PIPELINING": {
                 "value": "0"
